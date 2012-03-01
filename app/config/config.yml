@@ -1,0 +1,86 @@
+imports:
+    - { resource: parameters.ini }
+    - { resource: security.yml }
+
+framework:
+    #esi:             ~
+    #translator:      { fallback: %locale% }
+    translator:      ~
+    secret:          %secret%
+    charset:         UTF-8
+    router:          { resource: "%kernel.root_dir%/config/routing.yml" }
+    form:            true
+    csrf_protection: true
+    validation:      { enable_annotations: true }
+    templating:      { engines: ['twig'] } #assets_version: SomeVersionScheme
+    session:
+        default_locale: %locale%
+        auto_start:     true
+
+# Twig Configuration
+twig:
+    debug:            %kernel.debug%
+    strict_variables: %kernel.debug%
+
+# Assetic Configuration
+assetic:
+    debug:          %kernel.debug%
+    use_controller: false
+    # java: /usr/bin/java
+    filters:
+        cssrewrite: ~
+        # closure:
+        #     jar: %kernel.root_dir%/java/compiler.jar
+        # yui_css:
+        #     jar: %kernel.root_dir%/java/yuicompressor-2.4.2.jar
+
+# Doctrine Configuration
+doctrine:
+    dbal:
+        driver:   %database_driver%
+        host:     %database_host%
+        port:     %database_port%
+        dbname:   %database_name%
+        user:     %database_user%
+        password: %database_password%
+        charset:  UTF8
+
+    orm:
+        auto_generate_proxy_classes: %kernel.debug%
+        auto_mapping: true
+
+# Swiftmailer Configuration
+swiftmailer:
+    transport: %mailer_transport%
+    host:      %mailer_host%
+    username:  %mailer_user%
+    password:  %mailer_password%
+
+jms_security_extra:
+    secure_controllers:  true
+    secure_all_services: false
+
+fos_user:
+    db_driver: orm # other valid values are 'mongodb', 'couchdb' and 'propel'
+    firewall_name: secured_area
+    user_class: Koyaan\UserBundle\Entity\User
+    
+#fos_twitter:
+#    file: %kernel.root_dir%/../vendor/twitteroauth/twitteroauth/twitteroauth.php
+#    consumer_key: Ja0Fj8M150ZaYkXtqHq3w
+#    consumer_secret: tWoHwwrRGNRc7Ar8R5pLcocdjqMDSTlwYxzqYvwm4
+#    callback_url: http://85.127.188.35/app_dev.php/twitter/login_check
+
+#services:
+#    my.twitter.user:
+#        class: Koyaan\BsBotBundle\BotBundle\Security\User\Provider\TwitterProvider
+#        arguments:
+#          twitter_oauth: "@fos_twitter.api" 
+#          userManager: "@fos_user.user_manager"
+#          validator: "@validator"
+#          session: "@session"  
+stof_doctrine_extensions:
+    default_locale: en_US
+    orm:
+        default:
+            timestampable: true

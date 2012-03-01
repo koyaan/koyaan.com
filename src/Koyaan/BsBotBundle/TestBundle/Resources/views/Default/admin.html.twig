@@ -1,0 +1,10 @@
+{% extends '::base.html.twig' %}
+
+{% block title %}AHOI SF2{% endblock %}
+
+{% block body %}
+        <h1>AHOI SF2</h1>
+        <h2>admin area</h2>
+        <p>User: {{ user.username }}</p>
+        <a href="{{ path ('logout')}}">logout</a>
+{% endblock %}

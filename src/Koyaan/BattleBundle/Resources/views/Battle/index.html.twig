@@ -1,0 +1,12 @@
+{% extends '::battle_base.html.twig' %}
+{% block title %}Battletube{% endblock %}
+{% block body %}
+<div class="centered">
+<h1>Battletube</h1>
+    {% for entity in entities %}
+        <a class="indexLink" href="{{ path('battle_show', { 'id': entity.id }) }}">{{ entity.title }}</a><br/>
+    {% endfor %}
+
+    <a class="backLink" href="{{ path('battle_new') }}">Create a battle</a>
+</div>
+{% endblock %}

@@ -1,0 +1,36 @@
+{% extends 'KoyaanBoilerBundle:Default:base.html.twig' %}
+{% block stylesheets %}
+{# Example mixing in the reset top/bottom to your css less file #}
+{% stylesheets 
+    '@KoyaanBoilerBundle/Resources/public/css/boiler_top.css'
+    '@KoyaanHomeBundle/Resources/public/css/*'
+    '@KoyaanBoilerBundle/Resources/public/css/boiler_bottom.css'
+%}
+    <link href="{{ asset_url }}" type="text/css" rel="stylesheet" />
+{% endstylesheets %}
+{% endblock %}
+{% block title %}koyaan.at{% endblock %}
+{% block header %}
+{%endblock%}  
+{% block javascripts %}
+{# Include the parent JS that is provided by h5bp, like jquery, belated, .. #}
+{{ parent() }}
+{% javascripts %}
+    <script type="text/javascript" src="{{ asset_url }}"></script>
+{% endjavascripts %}
+{% endblock %}
+{% block analytics %}
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-29363638-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+{% endblock %}

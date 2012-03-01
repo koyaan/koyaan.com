@@ -1,0 +1,47 @@
+<!DOCTYPE HTML>
+<html lang="en">
+    <head>
+        <title>{% block title %}Squareglobe{% endblock %}</title>
+        <meta charset="utf-8">
+        <meta name="description" content="Squareglobe visualizes your Foursquare checkin location data. Built upon WebGL Globe by the Google Data Arts Team">
+        <meta name="author" content="Armin Weihbold">
+        {% block header %}
+        {% endblock %}
+        {% stylesheets 
+            '@KoyaanGlobeBundle/Resources/public/css/*'
+        %}
+            <link href="{{ asset_url }}" type="text/css" rel="stylesheet" />
+        {% endstylesheets %}
+    </head>
+    <body>
+        
+        <div id="title">
+            Squareglobe
+        </div>
+
+        <div id="container"></div>
+
+{% block body %}{% endblock %}
+        <div id="info">
+            <strong>Built upon <a href="http://www.chromeexperiments.com/globe">WebGL Globe</a></strong> by the Google Data Arts Team <span class="bull">&bull;</span> Created by <a href="https://plus.google.com/111276455097583689966">Armin Weihbold</a><span class="bull">&bull;</span> Demonstration data provided by <a href="https://plus.google.com/117972592845592950046">Ulf Weihbold</a>
+        </div>
+        <a id="ce" href="http://www.chromeexperiments.com/globe">
+            <span>This is a Chrome Experiment</span>
+        </a>        
+{% block analytics %}
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-29363638-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+{% endblock %}
+    </body>
+</html>

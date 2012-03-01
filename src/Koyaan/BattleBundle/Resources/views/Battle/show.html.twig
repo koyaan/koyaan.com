@@ -1,0 +1,29 @@
+{% extends '::battle_base.html.twig' %}
+{% block title %}{{ entity.title }} - Battletube{% endblock %}
+{% block body %}
+<div class="centered">
+    <h1>{{ entity.title }}</h1>
+    {% if entity.description %}
+    <h3>{{ entity.description }}</h3>
+    {% endif %}
+    <div id="video1" class="video">
+        <iframe width="420" height="315" src="http://www.youtube.com/embed/{{ entity.videoID1 }}" frameborder="0" allowfullscreen></iframe><br/>
+    </div>
+
+    <div id="video2" class="video">
+        <iframe width="420" height="315" src="http://www.youtube.com/embed/{{ entity.videoID2 }}" frameborder="0" allowfullscreen></iframe><br/>
+    </div>
+
+    <div id="voteLayer">
+        <div class="video">
+            <a class="voteButton" href="{{ url('battle_vote', { 'id': entity.id , 'vote': 1}) }}">Vote</a><br/>
+        </div>
+        <div class="video">
+            <a class="voteButton" href="{{ url('battle_vote', { 'id': entity.id , 'vote': 2}) }}">Vote</a><br/>
+        </div>
+    </div>
+    <br/>
+
+    <a class="backLink" href="{{ path('battle') }}"><< all Battles</a>&nbsp;&nbsp;&nbsp;<a class="backLink" href="{{ path('battle_new') }}">Create a battle</a>
+</div>
+{% endblock %}

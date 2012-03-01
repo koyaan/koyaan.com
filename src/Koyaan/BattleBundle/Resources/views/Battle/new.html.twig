@@ -1,0 +1,15 @@
+{% extends '::battle_base.html.twig' %}
+{% block title %}Create a battle -  Battletube{% endblock %}
+{% block body %}
+<h1>Create a battle</h1>
+<div class="centered">
+    <p>Just choose a title + description<br/> and paste 2 youtube video URLs<br/>(e.g. http://www.youtube.com/watch?v=s4N0OiS7uzY)<br/>
+    <form action="{{ path('battle_create') }}" method="post" {{ form_enctype(form) }}>
+        {{ form_widget(form) }}
+        <p>
+            <button type="submit" class="voteButton">Create</button>
+        </p>
+    </form>
+    <a class="backLink" href="{{ path('battle') }}"><< Cancel</a>
+</div>
+{% endblock %}

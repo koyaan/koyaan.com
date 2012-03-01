@@ -1,0 +1,111 @@
+{% extends 'KoyaanGlobeBundle:Default:base.html.twig' %}
+{% block body %}
+    <div id="currentInfo">
+            <span class="subject">{{name}}</span>
+        </div>
+
+        <div id="notes">
+            <p>Squareglobe visualizes your Foursquare checkin location data, up to 500 checkins per point are shown.</p>
+            <p>Getting the data from foursquare can take a while.</p>
+            <p>To make this visualization publicly available click the link below.</p>
+            <a id="share" class="myglobeLink" href="#">Share this Globe</a>
+        </div>
+
+        <script type="text/javascript" src="/bundles/koyaanglobe/js/third-party/Three/ThreeWebGL.js"></script>
+        <script type="text/javascript" src="/bundles/koyaanglobe/js/third-party/Three/ThreeExtras.js"></script>
+        <script type="text/javascript" src="/bundles/koyaanglobe/js/third-party/Three/RequestAnimationFrame.js"></script>
+        <script type="text/javascript" src="/bundles/koyaanglobe/js/third-party/Three/Detector.js"></script>
+        <script type="text/javascript" src="/bundles/koyaanglobe/js/third-party/Tween.js"></script>
+        <script type="text/javascript" src="/bundles/koyaanglobe/js/globe.js"></script>
+        <script type="text/javascript">
+
+          if(!Detector.webgl){
+            Detector.addGetWebGLMessage();
+          } else {
+
+            var container = document.getElementById('container');
+            var globe = new DAT.Globe(container);
+            //console.log(globe);
+            var i;
+
+            var setsubject = function(globe, t) {
+              return function() {
+                new TWEEN.Tween(globe).to({time:t},500).easing(TWEEN.Easing.Cubic.EaseOut).start();
+              };
+            };
+      
+            var xhr;
+            TWEEN.start();
+      
+            xhr = new XMLHttpRequest();
+            xhr.open('GET', '/squareglobe/data/{{token}}',true);
+      
+            xhr.onreadystatechange = function(e) {
+              if (xhr.readyState === 4) {
+                if (xhr.status === 200) {
+                  var data = JSON.parse(xhr.responseText);
+                  window.data = data;
+                  for (i=0;i<data.length;i++) {
+                    globe.addData(data[i][1], {format: 'magnitude', name: data[i][0], animated: true});
+                  }
+                  globe.createPoints();
+                  setsubject(globe,0)();
+                  globe.animate();
+                  var y = document.getElementById('share');
+                  y.onclick = function(){
+                      saveGlobe();
+                      return false;
+                  };
+                }
+              }
+            };
+      
+            xhr.send(null);
+          }
+           // save the globe along with a resized snapshot of the current display         
+            function saveGlobe()  {
+                var canvas = document.getElementsByTagName('canvas')[0];
+                var ratio = canvas.width/canvas.height;
+                var thumbsize= 250;
+                var ratio = thumbsize/canvas.height;
+                var resizecanvas = document.createElement("canvas");
+                resizecanvas.id = "resize";
+                resizecanvas.height = thumbsize;
+                resizecanvas.width = thumbsize;
+                resizecanvas.style.display ="none";
+
+                var deltaX = (-(canvas.width - canvas.height)/2)*ratio;
+                
+                document.getElementById('notes').appendChild(resizecanvas);
+                var context = resizecanvas.getContext('2d');
+                
+                img = new Image();              
+                img.onload = function(){                                    
+                    context.drawImage(this,deltaX,0,canvas.width*ratio,canvas.height*ratio);
+                    var snapcanvas = document.getElementById('resize');
+                    var snapshot = snapcanvas.toDataURL();
+                    var url = "/squareglobe/save";
+                    var params = "token={{token}}&snapshot="+encodeURIComponent(snapshot);
+                    //console.log(params);
+                    xhr.open("POST", url, true);
+                    xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+                    xhr.onreadystatechange = function(e) {
+                        if (xhr.readyState === 4) {
+                            if (xhr.status === 200) {
+                                var p = document.createElement("p");
+                                var url = "http://koyaan.com/squareglobe/s/{{token}}";
+                                p.innerHTML = '<p>Saved this Globe with the url <a href="'+url+'">'+url+'</a></p>';
+                                document.getElementById('notes').appendChild(p);
+                                var shareAnchor = document.getElementById('share')
+                                shareAnchor.innerText = "Permalink";
+                                shareAnchor.href = url;
+                            }
+                        }
+                    }
+                    xhr.send(params);
+                };
+                globe.render();
+                img.src=canvas.toDataURL();
+            }
+            </script>
+{% endblock %}

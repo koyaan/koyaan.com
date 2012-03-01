@@ -1,0 +1,33 @@
+{% extends '::battle_base.html.twig' %}
+{% block body %}
+<h1>{{ entity.title }}</h1>
+{% if entity.description %}
+<h3>{{ entity.description }}</h3>
+{% endif %}
+<div id="video1" class="video">
+    <iframe width="420" height="315" src="http://www.youtube.com/embed/{{ entity.videoID1 }}" frameborder="0" allowfullscreen></iframe><br/>
+</div>
+
+<div id="video2" class="video">
+    <iframe width="420" height="315" src="http://www.youtube.com/embed/{{ entity.videoID2 }}" frameborder="0" allowfullscreen></iframe><br/>
+</div>
+
+<div id="voteLayer">
+    <div class="video">
+        <div class="voteWrap">
+            <div class="voteBar right" style="width: {{ pixelResult[0] }}%"><span>{{ pixelResult[0] }}%</span></div>
+        </div>
+    </div>
+    <div class="video">
+        <div class="voteWrap">
+            <div class="voteBar left" style="width: {{ pixelResult[1] }}%"><span>{{ pixelResult[1] }}%</span></div>
+        </div>  
+    </div>
+</div>
+<br/>
+
+<div class="centered">
+    <a class="backLink" href="{{ path('battle') }}"><< all Battles</a>
+</div>
+
+{% endblock %}

@@ -1,0 +1,187 @@
+/* 
+    Document   : main.css
+    Created on : Feb 8, 2012, 11:40:43 PM
+    Author     : koyaan
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+body {
+    font-family: Courier New;
+    background: #FFF;
+}
+body, a, a:visited, a:active {
+    color: #000;
+}
+a {
+   text-decoration: none;
+}
+
+a:hover {
+    color: #0066EE;
+}
+
+h1, h2, h3, p { 
+    text-align: center;
+    margin: 5px;
+}
+
+h1 {
+    font-size: 50px;
+    margin-bottom: 15px;
+    text-shadow: 0 1px 0 #ccc, 0 2px 0 #c9c9c9, 0 3px 0 #bbb, 0 4px 0 #b9b9b9, 0 5px 0 #aaa, 0 6px 1px rgba(0,0,0,.1), 0 0 5px rgba(0,0,0,.1), 0 1px 3px rgba(0,0,0,.3), 0 3px 5px rgba(0,0,0,.2), 0 5px 10px rgba(0,0,0,.25), 0 10px 10px rgba(0,0,0,.2), 0 20px 20px rgba(0,0,0,.15);
+}
+
+h2 {
+    font-size: 33px;
+}
+
+h3 {
+    margin-bottom: 23px;
+}
+
+.centered {
+    text-align: center;
+}
+
+#user_header    {
+    width: 300px;
+    margin: 0 auto;
+}
+
+div[role=main]  {
+    width: 100%;
+    margin: 0 auto;
+    padding-top: 23px;
+}
+
+div.video   {
+    display: inline-block;
+    text-align: center;
+    width: 445px;
+}
+
+.indexLink  {
+    font-size: 25px;
+}
+
+.backLink   {
+    margin-top: 25px;
+    display: inline-block;
+    text-decoration: none;
+    color: #222;
+    font-size: 23px;
+    font-weight: 700;
+}
+
+#voteLayer  {
+    margin: 20px 0;
+    height: 50px;
+}
+
+.voteWrap   {
+    position: relative;
+    border: 1px solid #333;
+    width: 418px;
+    height:15px;
+    margin: 0 auto;
+}
+.voteBar   {
+    background-color: #000;
+    height: 100%;
+    font-size: 12px;
+    color: #fff;
+} 
+
+.left   {
+    position: absolute;
+    left: 0px;
+    text-align:left;
+}
+
+.left span {
+    padding-left: 5px;
+}
+
+.right {
+    position: absolute;
+    right: 0px;
+    text-align: right;
+}
+
+.right span {
+    padding-right: 5px;
+}
+
+label   {
+    display: inline-block;
+    width: 140px;
+    text-align: right;
+    padding-right: 10px;
+}
+
+input[type=text]   {
+    background: none repeat scroll 0 0 #F3F0F0;
+    border: 0 solid #646464;
+    border-radius: 5px 5px 5px 5px;
+    box-shadow: -1px -1px 2px #646464;
+    color: #646464;
+    font-size: 13px;
+    height: 20px;
+    margin: 3px 95px 10px 3px;
+    padding: 3px;
+    width: 450px;
+}
+/* button style generated at http://www.cssbuttongenerator.com */
+.voteButton{
+	-moz-box-shadow:inset 0px 1px 0px 0px #a8a8a8;
+	-webkit-box-shadow:inset 0px 1px 0px 0px #a8a8a8;
+	box-shadow:inset 0px 1px 0px 0px #a8a8a8;
+	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #5e5e5e), color-stop(1, #000000) );
+	background:-moz-linear-gradient( center top, #5e5e5e 5%, #000000 100% );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#5e5e5e', endColorstr='#000000');
+	background-color:#5e5e5e;   
+	-moz-border-radius:6px;
+	-webkit-border-radius:6px;
+	border-radius:6px;
+	border:1px solid #e0dce0;
+	display:inline-block;
+	color:#e3e0e3;
+	font-family:Courier New;
+	font-size:19px;
+	font-weight:bold;
+	padding:6px 17px;
+	text-decoration:none;
+	text-shadow:1px 1px 0px #555555;
+}.voteButton:hover {
+	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #000000), color-stop(1, #5e5e5e) );
+	background:-moz-linear-gradient( center top, #000000 5%, #5e5e5e 100% );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#000000', endColorstr='#5e5e5e');
+	background-color:#000000;
+}.voteButton:active {
+	position:relative;
+	top:1px;
+}
+
+.voteButton:visited {
+	color: #fff;
+}
+
+footer {
+    position: absolute;
+    bottom: 10px;
+    width: 100%;
+}
+
+.decals {
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+}
+
+.impressum  {
+    font-size: 10px;
+    position: absolute;
+    right: 15px;
+    bottom: 0px;
+}

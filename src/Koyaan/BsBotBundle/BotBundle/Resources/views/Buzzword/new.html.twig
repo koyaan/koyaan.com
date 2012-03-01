@@ -1,0 +1,19 @@
+{% extends '::base.html.twig' %}
+{% block body %}
+<h2>Buzzword creation</h2>
+
+<form action="{{ path('buzzword_create') }}" method="post" {{ form_enctype(form) }}>
+    {{ form_widget(form) }}
+    <p>
+        <button type="submit">Create</button>
+    </p>
+</form>
+
+<ul class="record_actions">
+    <li>
+        <a href="{{ path('buzzword') }}">
+            Back to the list
+        </a>
+    </li>
+</ul>
+{% endblock %}

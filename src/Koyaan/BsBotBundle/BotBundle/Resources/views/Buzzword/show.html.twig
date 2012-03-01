@@ -1,0 +1,36 @@
+{% extends '::base.html.twig' %}
+{% block body %}
+<h2>Buzzword</h2>
+
+<table class="record_properties">
+    <tbody>
+        <tr>
+            <th>Id</th>
+            <td>{{ entity.id }}</td>
+        </tr>
+        <tr>
+            <th>Word</th>
+            <td>{{ entity.word }}</td>
+        </tr>
+    </tbody>
+</table>
+
+<ul class="record_actions">
+    <li>
+        <a href="{{ path('buzzword') }}">
+            Back to the list
+        </a>
+    </li>
+    <li>
+        <a href="{{ path('buzzword_edit', { 'id': entity.id }) }}">
+            Edit
+        </a>
+    </li>
+    <li>
+        <form action="{{ path('buzzword_delete', { 'id': entity.id }) }}" method="post">
+            {{ form_widget(delete_form) }}
+            <button type="submit">Delete</button>
+        </form>
+    </li>
+</ul>
+{% endblock %}

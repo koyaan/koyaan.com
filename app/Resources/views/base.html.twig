@@ -1,0 +1,40 @@
+{% extends 'KoyaanBoilerBundle:Default:base.html.twig' %}
+{% block stylesheets %}
+{# Example mixing in the reset top/bottom to your css less file #}
+{% stylesheets 
+    '@KoyaanBoilerBundle/Resources/public/css/boiler_top.css'
+    '@KoyaanBsBotBundleBotBundle/Resources/public/css/*'
+    '@KoyaanBoilerBundle/Resources/public/css/boiler_bottom.css'
+%}
+    <link href="{{ asset_url }}" type="text/css" rel="stylesheet" />
+{% endstylesheets %}
+{% endblock %}
+{% block title %}koyaan.at{% endblock %}
+{% block header %}
+    <h1>koyaan.at</h1>
+    <div id="user_header">
+{% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+{{ 'layout.logged_in_as'|trans({'%username%': app.user.username}, 'FOSUserBundle') }} |
+        <a href="{{ path('fos_user_security_logout') }}">
+{{ 'layout.logout'|trans({}, 'FOSUserBundle') }}
+        </a>
+{% else %}
+        <a href="{{ path('fos_user_security_login') }}">{{ 'layout.login'|trans({}, 'FOSUserBundle') }}</a>
+{% endif %}
+    </div>
+{% for key, message in app.session.getFlashes() %}
+    <div class="{{ key }}">
+{{ message|trans({}, 'FOSUserBundle') }}
+    </div>
+{% endfor %}
+{%endblock%}  
+{% block javascripts %}
+{# Include the parent JS that is provided by h5bp, like jquery, belated, .. #}
+{{ parent() }}
+{% javascripts %}
+    <script type="text/javascript" src="{{ asset_url }}"></script>
+{% endjavascripts %}
+{% endblock %}
+{% block analytics %}
+<!-- Analytics -->
+{% endblock %}
