@@ -1,5 +1,10 @@
 {% extends 'KoyaanGlobeBundle:Default:base.html.twig' %}
 {% block body %}
+
+    {% if error is defined %}
+        <div id="error">{{error}}</div>
+    {% else %}
+
     <div id="currentInfo">
             <span class="subject">{{name}}</span>
         </div>
@@ -44,18 +49,27 @@
               if (xhr.readyState === 4) {
                 if (xhr.status === 200) {
                   var data = JSON.parse(xhr.responseText);
-                  window.data = data;
-                  for (i=0;i<data.length;i++) {
-                    globe.addData(data[i][1], {format: 'magnitude', name: data[i][0], animated: true});
+                  if(data != "error")   {
+                    window.data = data;
+                    for (i=0;i<data.length;i++) {
+                        globe.addData(data[i][1], {format: 'magnitude', name: data[i][0], animated: true});
+                    }
+                    globe.createPoints();
+                    setsubject(globe,0)();
+                    globe.animate();
+                    var y = document.getElementById('share');
+                    y.onclick = function(){
+                        saveGlobe();
+                        return false;
+                    };
+                  } else { /* getting data failed */
+                    var errordiv = document.createElement("div");
+                    errordiv.innerHTML = 'An error occured while trying to get your data from foursquare!';
+                    errordiv.id = "error";
+                    document.body.appendChild(errordiv);
+                    var shareAnchor = document.getElementById('share')
+                    shareAnchor.style.display = "none";
                   }
-                  globe.createPoints();
-                  setsubject(globe,0)();
-                  globe.animate();
-                  var y = document.getElementById('share');
-                  y.onclick = function(){
-                      saveGlobe();
-                      return false;
-                  };
                 }
               }
             };
@@ -108,4 +122,5 @@
                 img.src=canvas.toDataURL();
             }
             </script>
+   {% endif %}
 {% endblock %}

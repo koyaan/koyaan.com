@@ -6,10 +6,10 @@
             <th>Id</th>
             <th>Name</th>
             <th>Token</th>
-            <th>Data</th>
+{#            <th>Data</th>#}
             <th>Accesstoken</th>
             <th>Public</th>
-            <th>Picture</th>
+{#            <th>Picture</th>#}
             <th>Created at</th>
             <th>Actions</th>
         </tr>
@@ -20,10 +20,10 @@
             <td><a href="{{ path('squareglobe_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
             <td>{{ entity.name }}</td>
             <td>{{ entity.token }}</td>
-            <td>{{ entity.data }}</td>
+  {#          <td>{{ entity.data }}</td> #}
             <td>{{ entity.accessToken }}</td>
             <td>{{ entity.public }}</td>
-            <td>{{ entity.picture }}</td>
+  {#          <td>{{ entity.picture }}</td> #}
             <td>{{ entity.created_at.date|date("c")}}</td>
             <td>
                 <ul>

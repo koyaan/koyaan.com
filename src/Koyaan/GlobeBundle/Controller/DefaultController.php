@@ -79,8 +79,8 @@ class DefaultController extends Controller {
      * @Template()
      */
     public function myAction() {
-        $app_client_id = "UUXGV3BSLTGTJY0QDJWB1BHLAFLSKWH521MNHSL4T0YF5FUN";
-        $app_client_secret = "CRMGOVHE2J4Q5AEVTJTJ4PYMC1X0DQRG1Y2CR54XXICXA5BJ";
+        $app_client_id = $this->container->getParameter("foursquare_app_id");
+        $app_client_secret = $this->container->getParameter("foursquare_app_secret");
         $app_redirect_uri = "http://koyaan.com/squareglobe/my";
 
         if (!$this->getRequest()->get("code")) {
@@ -88,10 +88,18 @@ class DefaultController extends Controller {
         } else {
             $code = $this->getRequest()->get("code");
             $JSONtoken = file_get_contents("https://foursquare.com/oauth2/access_token?client_id=" . $app_client_id . "&client_secret=" . $app_client_secret . "&grant_type=authorization_code&redirect_uri=" . $app_redirect_uri . "&code=" . $code);
-            $accessToken = json_decode($JSONtoken)->access_token;
-            $userName = $this->getUserName($accessToken);
-            $globeToken = $this->createUserGlobe($accessToken,$userName);
-            return(array("token" => $globeToken, "name" => $userName));
+            if($JSONtoken)  {
+                $accessToken = json_decode($JSONtoken)->access_token;
+                $userName = $this->getUserName($accessToken);
+                if($userName)   {
+                    $globeToken = $this->createUserGlobe($accessToken,$userName);
+                    return(array("token" => $globeToken, "name" => $userName));
+                } else {
+                     return(array("error" => "An error occured while trying to connect to foursquare!"));
+                }
+            } else {
+                return(array("error" => "An error occured while trying to connect to foursquare!"));
+            }
         }
     }
 
@@ -117,9 +125,12 @@ class DefaultController extends Controller {
     }
 
     private function getUserName($oauthToken) {
-        $data = file_get_contents("https://api.foursquare.com/v2/users/self?v=" . date("Ymd") . "&oauth_token=" . $oauthToken);
-        $dataObject = json_decode($data);
-        return $dataObject->response->user->firstName . " " . $dataObject->response->user->lastName;
+        if(($data = file_get_contents("https://api.foursquare.com/v2/users/self?v=" . date("Ymd") . "&oauth_token=" . $oauthToken)) !== false)   {
+            $dataObject = json_decode($data);
+            return $dataObject->response->user->firstName . " " . $dataObject->response->user->lastName;
+        } else {
+            return false;
+        }
     }
 
     /**
@@ -160,7 +171,7 @@ class DefaultController extends Controller {
      //   $response->setStatusCode(200);
    //     $response->headers->set('Content-Type', $type);
         
-      return new Response(base64_decode($data[1]), 200, $headers);
+        return new Response(base64_decode($data[1]), 200, $headers);
   //      return $response;   
     }
     
@@ -179,29 +190,31 @@ class DefaultController extends Controller {
         }
 
         $geobinsSelf = array();
-        $geobinsSelf = $this->getData($geobinsSelf, $userGlobe->getAccessToken(), 0, "self");
-
-        $data = "";
-        $data .= '[';
-        $data .= '["self",[';
-        $flat = array();
-        foreach ($geobinsSelf as $bin) {
-            $flat[] = $bin->lat;
-            $flat[] = $bin->lng;
-            if ($bin->count > $resolution) {
-                $flat[] = 1;
-            } else {
-                $flat[] = $bin->count / $resolution;
+        if(($geobinsSelf = $this->getData($geobinsSelf, $userGlobe->getAccessToken(), 0, "self")) !== false) {
+            $data = "";
+            $data .= '[';
+            $data .= '["self",[';
+            $flat = array();
+            foreach ($geobinsSelf as $bin) {
+                $flat[] = $bin->lat;
+                $flat[] = $bin->lng;
+                if ($bin->count > $resolution) {
+                    $flat[] = 1;
+                } else {
+                    $flat[] = $bin->count / $resolution;
+                }
             }
-        }
-        $data .= implode(",", $flat);
-        $data .= ']]]';
+            $data .= implode(",", $flat);
+            $data .= ']]]';
 
-        $userGlobe->setData($data);
-        $em->persist($userGlobe);
-        $em->flush();
-        
-        return new Response($data);
+            $userGlobe->setData($data);
+            $em->persist($userGlobe);
+            $em->flush();
+            
+            return new Response($data);
+        } else {
+            return new Response("error");
+        }
     }
     
     
@@ -210,53 +223,59 @@ class DefaultController extends Controller {
     private function getData($geobins, $oauthToken, $offset = 0, $subject = "self") {
 
         if ($subject == "self") {
-            $data = file_get_contents("https://api.foursquare.com/v2/users/self/checkins?v=" . date("Ymd") . "&oauth_token=" . $oauthToken . "&limit=250&offset=" . $offset);
-            $dataObject = json_decode($data);
-            $checkins = $dataObject->response->checkins->items;
+            if(($data = file_get_contents("https://api.foursquare.com/v2/users/self/checkins?v=" . date("Ymd") . "&oauth_token=" . $oauthToken . "&limit=250&offset=" . $offset)) !== false)   {
+                $dataObject = json_decode($data);
+                $checkins = $dataObject->response->checkins->items;
+            }
         } else if ($subject == "recent") {
-            $data = file_get_contents("https://api.foursquare.com/v2/checkins/recent?v=" . date("Ymd") . "&oauth_token=" . $oauthToken);
-            $dataObject = json_decode($data);
-            $checkins = $dataObject->response->recent;
-        }
-
-        foreach ($checkins as $checkin) {
-
-            if (isset($checkin->venue->location)) {
-                $location = $checkin->venue->location;
-            } else {
-                $location = $checkin->location;
-            }
-            $latitude = round($location->lat, 1);
-            $longitude = round($location->lng, 1);
-
-            if (($latitude * 10) % 2 == 1) {
-                $latitude -= 0.1;
-            }
-
-            if (($longitude * 10) % 2 == 1) {
-                $longitude -= 0.1;
-            }
-
-            $binIndex = $latitude . "-" . $longitude;
-            if (!array_key_exists($binIndex, $geobins)) {
-                $geobins[$binIndex] = new Geobin();
-                $geobins[$binIndex]->lat = $latitude;
-                $geobins[$binIndex]->lng = $longitude;
-            } else {
-                $geobins[$binIndex]->count++;
+            if(($data = file_get_contents("https://api.foursquare.com/v2/checkins/recent?v=" . date("Ymd") . "&oauth_token=" . $oauthToken)) !== false) {
+                $dataObject = json_decode($data);
+                $checkins = $dataObject->response->recent;
             }
         }
+        
+        if($data)   {
+            foreach ($checkins as $checkin) {
 
-        if ($subject == "self") {
-            $totalCheckinCount = $dataObject->response->checkins->count;
-            $dataCount = count($dataObject->response->checkins->items);
+                if (isset($checkin->venue->location)) {
+                    $location = $checkin->venue->location;
+                } else {
+                    $location = $checkin->location;
+                }
+                $latitude = round($location->lat, 1);
+                $longitude = round($location->lng, 1);
 
-            if ($offset + $dataCount < $totalCheckinCount) {
-                $geobins = $this->getData($geobins, $oauthToken, $offset + $dataCount);
+                if (($latitude * 10) % 2 == 1) {
+                    $latitude -= 0.1;
+                }
+
+                if (($longitude * 10) % 2 == 1) {
+                    $longitude -= 0.1;
+                }
+
+                $binIndex = $latitude . "-" . $longitude;
+                if (!array_key_exists($binIndex, $geobins)) {
+                    $geobins[$binIndex] = new Geobin();
+                    $geobins[$binIndex]->lat = $latitude;
+                    $geobins[$binIndex]->lng = $longitude;
+                } else {
+                    $geobins[$binIndex]->count++;
+                }
             }
-        }
 
-        return $geobins;
+            if ($subject == "self") {
+                $totalCheckinCount = $dataObject->response->checkins->count;
+                $dataCount = count($dataObject->response->checkins->items);
+
+                if ($offset + $dataCount < $totalCheckinCount) {
+                    $geobins = $this->getData($geobins, $oauthToken, $offset + $dataCount);
+                }
+            }
+            return $geobins;
+        } else {
+            return false;
+        }
+            
     }
 
 }
