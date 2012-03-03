@@ -31,6 +31,27 @@ class DefaultController extends Controller {
         
         return(array("token" => $userGlobe->getToken(), "name" => $userGlobe->getName()));
     }
+    
+    /** 
+     * @Route("/regex")
+     */
+    public function regex() {
+        $matches = array();
+//        $subject = "abcdef";
+//        $pattern = '/^def/';
+//        preg_match($pattern, substr($subject,3), $matches, PREG_OFFSET_CAPTURE);
+//        print_r($matches);
+        
+        $data = '[["self",[47.2,11.2,0.01,45.4,12.4,0.02,48,16.6,0.01,48.2,15.6,0.01,48,14.4,0.02,0,0,0.41]]]';
+//        
+////        $matches = array();
+////        var_dump(preg_match($data, "/\]\]\]$/", $matches));
+        var_dump(preg_match("/(0,0,[0-9\.]*)(]]])$/", $data, $matches));
+        print_r($matches);
+        var_dump(preg_replace("/(,0,0,[0-9\.]*)(]]])$/", "$2", $data));
+        
+        return new Response("done");
+    }
 
     /**
      * @Route("/squareglobe/save")
@@ -145,8 +166,12 @@ class DefaultController extends Controller {
         if (!$userGlobe) {
             throw $this->createNotFoundException('Unable to find Globe entity.');
         }
+        $data = $userGlobe->getData();
         
-        return new Response($userGlobe->getData());
+        /* clear the 0 0 coordinate if it exists */
+        $data = preg_replace("/(,0,0,[0-9\.]*)(]]])$/", "$2", $data);
+        
+        return new Response($data);
     }
     
      /**
@@ -195,7 +220,9 @@ class DefaultController extends Controller {
             $data .= '[';
             $data .= '["self",[';
             $flat = array();
-            foreach ($geobinsSelf as $bin) {
+            foreach ($geobinsSelf as $key => $bin) {
+                if($key == "0.0-0.0")
+                    continue;
                 $flat[] = $bin->lat;
                 $flat[] = $bin->lng;
                 if ($bin->count > $resolution) {

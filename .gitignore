@@ -10,3 +10,4 @@
 /logs
 Capfile
 /app/config/deploy.rb
+/_offline/*
