@@ -52,14 +52,24 @@
     display: none;
     }
 
-    #ce {
-    width: 107px;
-    height: 55px;
+    #socials {
+    bottom: 20px;
     display: block;
-    position: absolute;
-    bottom: 15px;
+    height: 24px;
     left: 20px;
-    background: url(/bundles/koyaanglobe/images/ce.png);
+    position: absolute;
+    width: 250px;
+    }
+    
+    #plusone    {
+          width: 35px;
+    }
+    
+    #like {
+        left: 50px;
+        position: absolute;
+        top: 0;
+        width: 150px;
     }
 
 #notes {

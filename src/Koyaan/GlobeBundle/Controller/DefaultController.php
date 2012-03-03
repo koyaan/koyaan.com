@@ -9,6 +9,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Component\HttpFoundation\Response;
 use Koyaan\GlobeBundle\Classes\Geobin;
 use Koyaan\GlobeBundle\Entity\Globe;
+use JMS\SecurityExtraBundle\Annotation\Secure;
 
 class DefaultController extends Controller {
 
@@ -34,6 +35,7 @@ class DefaultController extends Controller {
     
     /** 
      * @Route("/regex")
+     * @Secure(roles="ROLE_ADMIN")
      */
     public function regex() {
         $matches = array();
@@ -42,14 +44,19 @@ class DefaultController extends Controller {
 //        preg_match($pattern, substr($subject,3), $matches, PREG_OFFSET_CAPTURE);
 //        print_r($matches);
         
-        $data = '[["self",[47.2,11.2,0.01,45.4,12.4,0.02,48,16.6,0.01,48.2,15.6,0.01,48,14.4,0.02,0,0,0.41]]]';
+        $data = '[["self",[0,0,0.432,47.2,11.2,0.01,0,0,0.432,45.4,12.4,0.02,48,16.6,0.01,48.2,15.6,0.01,48,14.4,0.02,0,0,0.41]]]';
 //        
 ////        $matches = array();
 ////        var_dump(preg_match($data, "/\]\]\]$/", $matches));
-        var_dump(preg_match("/(0,0,[0-9\.]*)(]]])$/", $data, $matches));
+        $pattern = "/(,?0,0,[0-9\.]+)/";
+        var_dump(preg_match($pattern, $data, $matches));
         print_r($matches);
-        var_dump(preg_replace("/(,0,0,[0-9\.]*)(]]])$/", "$2", $data));
+
+        $data = preg_replace($pattern, "", $data);
         
+        $data = preg_replace("/\[,/", "[", $data);
+        
+        var_dump($data);
         return new Response("done");
     }
 
@@ -167,9 +174,12 @@ class DefaultController extends Controller {
             throw $this->createNotFoundException('Unable to find Globe entity.');
         }
         $data = $userGlobe->getData();
-        
+            
         /* clear the 0 0 coordinate if it exists */
-        $data = preg_replace("/(,0,0,[0-9\.]*)(]]])$/", "$2", $data);
+        $pattern = "/(,?0,0,[0-9\.]+)/";
+        $data = preg_replace($pattern, "", $data);
+        
+        $data = preg_replace("/\[,/", "[", $data);
         
         return new Response($data);
     }

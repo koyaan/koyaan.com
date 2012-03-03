@@ -3,7 +3,7 @@
     <head>
         <title>{% block title %}Squareglobe{% endblock %}</title>
         <meta charset="utf-8">
-        <meta name="description" content="Squareglobe visualizes your Foursquare checkin location data. Built upon WebGL Globe by the Google Data Arts Team">
+        <meta name="description" content="Squarelobe visualizes your Foursquare checkin location data. Built upon WebGL Globe by the Google Data Arts Team">
         <meta name="author" content="Armin Weihbold">
         {% block header %}
         {% endblock %}
@@ -14,7 +14,14 @@
         {% endstylesheets %}
     </head>
     <body>
-        
+        <div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=264843866925546";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
         <div id="title">
             Squareglobe
         </div>
@@ -23,11 +30,24 @@
 
 {% block body %}{% endblock %}
         <div id="info">
-            <strong>Built upon <a href="http://www.chromeexperiments.com/globe">WebGL Globe</a></strong> by the Google Data Arts Team <span class="bull">&bull;</span> Created by <a href="https://plus.google.com/111276455097583689966">Armin Weihbold</a><span class="bull">&bull;</span> Demonstration data provided by <a href="https://plus.google.com/117972592845592950046">Ulf Weihbold</a>
+            <strong>Built upon <a href="http://www.chromeexperiments.com/globe">WebGL Globe</a></strong> by the Google Data Arts Team <span class="bull">&bull;</span> Created by <a href="https://plus.google.com/111276455097583689966">Armin Weihbold</a> <a href="https://plus.google.com/111276455097583689966">G+</a>  <a href="https://twitter.com/#!/koyaan5">twitter</a> <a href="https://www.facebook.com/armin.weihbold">facebook</a><span class="bull">&bull;</span> Demonstration data provided by <a href="https://plus.google.com/117972592845592950046">Ulf Weihbold</a>
         </div>
-        <a id="ce" href="http://www.chromeexperiments.com/globe">
-            <span>This is a Chrome Experiment</span>
-        </a>        
+        <div id="socials">
+            <div div="plusone">
+                <div class="g-plusone" data-size="medium" data-annotation="none"></div>
+            </div>
+            <div id="like">
+                <div class="fb-like" data-send="false" data-layout="button_count" data-width="150" data-show-faces="false" data-colorscheme="dark" data-font="arial"></div>
+            </div>
+        </div>
+
+<script type="text/javascript">
+  (function() {
+    var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+    po.src = 'https://apis.google.com/js/plusone.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+  })();
+</script>
 {% block analytics %}
 <script type="text/javascript">
     
