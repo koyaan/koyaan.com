@@ -18,7 +18,7 @@ class DefaultController extends Controller {
      * @Template()
      */
     public function savedAction($token) {
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
 
         $userGlobe = $em->getRepository('KoyaanGlobeBundle:Globe')->findOneByToken($token);
 
@@ -69,7 +69,7 @@ class DefaultController extends Controller {
         $token = $this->getRequest()->get("token");
         $picture = $this->getRequest()->get("snapshot");
         
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
 
         $userGlobe = $em->getRepository('KoyaanGlobeBundle:Globe')->findOneByToken($token);
 
@@ -91,6 +91,7 @@ class DefaultController extends Controller {
      * @Template()
      */
     public function indexAction() {
+
         return array();
     }
 
@@ -107,9 +108,13 @@ class DefaultController extends Controller {
      * @Template()
      */
     public function myAction() {
-        $app_client_id = $this->container->getParameter("foursquare_app_id");
-        $app_client_secret = $this->container->getParameter("foursquare_app_secret");
+        $app_client_id = $this->container->getParameter("foursquare_client_id");
+        $app_client_secret = $this->container->getParameter("foursquare_client_id");
         $app_redirect_uri = "http://koyaan.com/squareglobe/my";
+
+//        \ChromePhp::log('Hello console!');
+//        \ChromePhp::log($_SERVER);
+//        \ChromePhp::warn('something went wrong!');
 
         if (!$this->getRequest()->get("code")) {
             return $this->redirect("https://foursquare.com/oauth2/authenticate?client_id=" . $app_client_id . "&response_type=code&redirect_uri=" . $app_redirect_uri);
@@ -131,6 +136,7 @@ class DefaultController extends Controller {
         }
     }
 
+
     /*
      * returns token of new globe
      */
@@ -145,7 +151,7 @@ class DefaultController extends Controller {
         $userGlobe->setData("B33F");
         $userGlobe->setPicture("B00BS");
 
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
         $em->persist($userGlobe);
         $em->flush();
 
@@ -166,7 +172,7 @@ class DefaultController extends Controller {
      */
     public function getdataAction($token) {
         
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
 
         $userGlobe = $em->getRepository('KoyaanGlobeBundle:Globe')->findOneByToken($token);
 
@@ -188,7 +194,7 @@ class DefaultController extends Controller {
      * @Route("/squareglobe/image/{token}.png")
      */
     public function imageAction($token) {
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
 
         $userGlobe = $em->getRepository('KoyaanGlobeBundle:Globe')->findOneByToken($token);
 
@@ -216,7 +222,7 @@ class DefaultController extends Controller {
     public function dataAction($token) {
         $resolution = 100;
 
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
 
         $userGlobe = $em->getRepository('KoyaanGlobeBundle:Globe')->findOneByToken($token);
 

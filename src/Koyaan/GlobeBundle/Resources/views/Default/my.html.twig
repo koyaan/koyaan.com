@@ -68,7 +68,7 @@
                     errordiv.innerHTML = 'An error occured while trying to get your data from foursquare!';
                     errordiv.id = "error";
                     document.body.appendChild(errordiv);
-                    var shareAnchor = document.getElementById('share')
+                    var shareAnchor = document.getElementById('share');
                     shareAnchor.style.display = "none";
                   }
                 }
@@ -111,13 +111,13 @@
                                 var url = "http://koyaan.com/squareglobe/s/{{token}}";
                                 p.innerHTML = '<p>Saved this Globe with the url <a href="'+url+'">'+url+'</a></p>';
                                 document.getElementById('notes').appendChild(p);
-                                var shareAnchor = document.getElementById('share')
+                                var shareAnchor = document.getElementById('share');
                                 shareAnchor.innerText = "Permalink";
                                 shareAnchor.href = url;
                                 shareAnchor.onclick = function(){};
                             }
                         }
-                    }
+                    };
                     xhr.send(params);
                 };
                 globe.render();

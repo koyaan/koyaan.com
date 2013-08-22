@@ -25,7 +25,7 @@ class BattleController extends Controller
      */
     public function indexAction()
     {
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
 
         $entities = $em->getRepository('KoyaanBattleBundle:Battle')->findAll();
 
@@ -40,7 +40,7 @@ class BattleController extends Controller
      */
     public function showAction($id)
     {
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
 
         $entity = $em->getRepository('KoyaanBattleBundle:Battle')->find($id);
 
@@ -90,7 +90,7 @@ class BattleController extends Controller
         $form->bindRequest($request);
 
         if ($form->isValid()) {
-            $em = $this->getDoctrine()->getEntityManager();
+            $em = $this->getDoctrine()->getManager();
             $em->persist($entity);
             $em->flush();
 
@@ -113,7 +113,7 @@ class BattleController extends Controller
      */
     public function editAction($id)
     {
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
 
         $entity = $em->getRepository('KoyaanBattleBundle:Battle')->find($id);
 
@@ -140,7 +140,7 @@ class BattleController extends Controller
      */
     public function updateAction($id)
     {
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
 
         $entity = $em->getRepository('KoyaanBattleBundle:Battle')->find($id);
 
@@ -184,7 +184,7 @@ class BattleController extends Controller
         $form->bindRequest($request);
 
         if ($form->isValid()) {
-            $em = $this->getDoctrine()->getEntityManager();
+            $em = $this->getDoctrine()->getManager();
             $entity = $em->getRepository('KoyaanBattleBundle:Battle')->find($id);
 
             if (!$entity) {
@@ -214,7 +214,7 @@ class BattleController extends Controller
      */
     public function voteAction($id,$vote)
     {
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
 
         $entity = $em->getRepository('KoyaanBattleBundle:Battle')->find($id);
 

@@ -25,7 +25,7 @@ class GlobeController extends Controller
      */
     public function indexAction()
     {
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
 
         $entities = $em->getRepository('KoyaanGlobeBundle:Globe')->findAll();
 
@@ -41,7 +41,7 @@ class GlobeController extends Controller
      */
     public function showAction($id)
     {
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
 
         $entity = $em->getRepository('KoyaanGlobeBundle:Globe')->find($id);
 

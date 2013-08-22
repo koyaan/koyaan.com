@@ -1,7 +1,11 @@
 security:
-#    factories:
-#        - "%kernel.root_dir%/../vendor/bundles/FOS/TwitterBundle/Resources/config/security_factories.xml"
-        
+    encoders:
+        FOS\UserBundle\Model\UserInterface: sha512
+
+    role_hierarchy:
+        ROLE_ADMIN:       ROLE_USER
+        ROLE_SUPER_ADMIN: [ROLE_USER, ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
+
     providers:
 #        in_memory:
 #            users:
@@ -11,8 +15,12 @@ security:
             id: fos_user.user_manager
 #        fos_twitter:
 #            id: my.twitter.user
-    
+
     firewalls:
+        dev:
+            pattern:  ^/(_(profiler|wdt)|css|images|js)/
+            security: false
+
         secured_area:
             pattern:    ^/
             anonymous: ~
@@ -25,7 +33,3 @@ security:
 
     access_control:
         - { path: ^/admin, roles: ROLE_ADMIN }
-
-    encoders:
-        FOS\UserBundle\Model\UserInterface: sha512
-#        Symfony\Component\Security\Core\User\User: plaintext

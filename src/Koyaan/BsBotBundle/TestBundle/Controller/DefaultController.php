@@ -27,6 +27,5 @@ class DefaultController extends Controller
     {
         $user = $this->get('security.context')->getToken()->getUser();
         return(array('user' => $user));
-        return array();
     }
 }

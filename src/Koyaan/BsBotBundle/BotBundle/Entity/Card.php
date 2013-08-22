@@ -47,7 +47,7 @@ class Card
      *
      * @param Koyaan\BsBotBundle\BotBundle\Entity\Buzzword $buzzwords
      */
-    public function addBuzzword(\Koyaan\BsBotBundle\BotBundle\Entity\Buzzword $buzzwords)
+    public function addBuzzword(Koyaan\BsBotBundle\BotBundle\Entity\Buzzword $buzzwords)
     {
         $this->buzzwords[] = $buzzwords;
     }

@@ -1,0 +1,44 @@
+body {
+    padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
+}
+body {
+    font-family: 'Ubuntu Mono';
+}
+h1 {
+    font-size: 4em;
+    line-height: 1em;
+    margin-bottom: 0.5em;
+    font-style: normal;
+    font-weight: 700;
+    font-family: 'Ubuntu Mono';
+    text-transform: uppercase;
+    margin-top: 0px;
+}
+h2 {
+    font-size: 2em;
+    line-height: 1em;
+    margin-bottom: 0.2em;
+    font-family: 'PT Sans Caption';
+    font-style: normal;
+    font-weight: 400;
+    color: rgba(66, 66, 66, 1.00);
+}
+p {
+    margin-bottom: 1em;
+    font-size: 1.4em;
+    line-height: 1.5em;
+    font-style: normal;
+    font-weight: 400;
+    font-family: Ubuntu;
+}
+p.date {
+    font-size: 1em;
+    line-height: 1.3em;
+    margin-bottom: 1em;
+    color: rgba(66, 66, 66, 1.00);
+}
+
+img.logo {
+        padding: 0px 15px 15px 0;
+        max-width: 100%;
+}

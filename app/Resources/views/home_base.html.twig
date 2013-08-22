@@ -1,36 +1,64 @@
-{% extends 'KoyaanBoilerBundle:Default:base.html.twig' %}
-{% block stylesheets %}
-{# Example mixing in the reset top/bottom to your css less file #}
-{% stylesheets 
-    '@KoyaanBoilerBundle/Resources/public/css/boiler_top.css'
-    '@KoyaanHomeBundle/Resources/public/css/*'
-    '@KoyaanBoilerBundle/Resources/public/css/boiler_bottom.css'
-%}
-    <link href="{{ asset_url }}" type="text/css" rel="stylesheet" />
-{% endstylesheets %}
-{% endblock %}
-{% block title %}koyaan.at{% endblock %}
-{% block header %}
-{%endblock%}  
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{% block title %}koyaan.com{% endblock %}</title>
+    {% block metadata %}
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="koyaan.com">
+    <meta name="author" content="armin weihbold">
+    {% endblock %}
+    <link rel="shortcut icon" href="/favicon.ico">
+
+    {% block stylesheets %}
+        {% stylesheets
+            '@KoyaanHomeBundle/Resources/public/bootstrap/css/bootstrap.min.css'
+            '@KoyaanHomeBundle/Resources/public/css/main3.css'
+        %}
+        <link href="{{ asset_url }}" type="text/css" rel="stylesheet" />
+        {% endstylesheets %}
+    {% endblock %}
+
+    <!-- webfonts -->
+    <link href='http://fonts.googleapis.com/css?family=Ubuntu+Mono|Ubuntu:400,700|PT+Sans+Caption' rel='stylesheet' type='text/css'>
+</head>
+<body>
+<div class="container">
+    {% block body %}
+    {% endblock %}
+    <footer>
+        {% block footer %}
+        {% endblock %}
+    </footer>
+</div>
+
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="//code.jquery.com/jquery.js"></script>
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="js/bootstrap.min.js"></script>
+
 {% block javascripts %}
-{# Include the parent JS that is provided by h5bp, like jquery, belated, .. #}
-{{ parent() }}
-{% javascripts %}
+    {% javascripts
+        '@KoyaanHomeBundle/Resources/public/bootstrap/js/bootstrap.min.js'
+    %}
     <script type="text/javascript" src="{{ asset_url }}"></script>
-{% endjavascripts %}
+    {% endjavascripts %}
 {% endblock %}
+
 {% block analytics %}
-<script type="text/javascript">
+    <script type="text/javascript">
 
-  var _gaq = _gaq || [];
-  _gaq.push(['_setAccount', 'UA-29363638-1']);
-  _gaq.push(['_trackPageview']);
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-29363638-1']);
+        _gaq.push(['_trackPageview']);
 
-  (function() {
-    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-  })();
+        (function() {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
 
-</script>
+    </script>
 {% endblock %}
+</body>
+</html>

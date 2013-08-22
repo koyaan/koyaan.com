@@ -3,9 +3,22 @@
 {% block title %}koyaan{% endblock %}
 
 {% block body %}
-        <h1 class="visuallyhidden">koyaan</h1>
-        <img src="{{ asset('/bundles/koyaanhome/images/koyaan.png') }}" alt="koyaan" class="logo"/>
+    <h1 class="sr-only">koyaan</h1>
+    <img src="{{ asset('/bundles/koyaanhome/images/koyaan.png') }}" alt="koyaan" class="logo"/>
+    <article>
+        <h2>Relaunch is imminent!</h2>
+        <p class="date">23. August 2013</p>
+        <p>American Apparel officia squid pariatur Odd Future. 8-bit nesciunt ad laboris iPhone. Thundercats tattooed quinoa cornhole, typewriter id Portland Tumblr. Viral Echo Park in church-key, twee lo-fi Vice tousled readymade forage ea ullamco Tumblr gluten-free commodo. Truffaut quinoa odio banjo vero, salvia Intelligentsia you probably haven't heard of them accusamus try-hard fap labore tousled eu. Mlkshk butcher literally, Banksy fugiat chambray Intelligentsia odio nulla irony delectus aliqua. Sriracha flannel fugiat, duis Truffaut Vice chambray elit pop-up magna aute Austin.</p>
+    </article>
+    <article>
+        <h2>Site coming back up as fast as possible</h2>
+        <p class="date">23. August 2012</p>
+        <p>Some random content to see how twitter bootstrap and typecast beta deliver. If you have anything to do at all with styling content on the web I urge you to give them a try.</p>
+        <p>Nothing else to see here move along!</p>
+    </article>
 {% endblock %}
 {% block footer %}
-        <div class="impressum">2012 - armin weihbold  - graben 19a A-4020 linz austria - armin.weihbold(at)gmail.com</div>
-{% endblock %}  
+    <div class="pull-right">
+    <a href="{{ path("contact") }}">contact</a>
+    </div>
+{% endblock %}

@@ -9,10 +9,19 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 class DefaultController extends Controller
 {
     /**
-     * @Route("/")
+     * @Route("/", name="index")
      * @Template()
      */
     public function indexAction()
+    {
+        return array();
+    }
+
+    /**
+     * @Route("/contact", name="contact")
+     * @Template()
+     */
+    public function impressumAction()
     {
         return array();
     }

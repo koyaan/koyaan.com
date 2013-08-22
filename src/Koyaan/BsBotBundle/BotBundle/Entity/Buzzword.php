@@ -71,7 +71,7 @@ class Buzzword
      *
      * @param Koyaan\BsBotBundle\BotBundle\Entity\Card $card
      */
-    public function setCard(\Koyaan\BsBotBundle\BotBundle\Entity\Card $card)
+    public function setCard(Koyaan\BsBotBundle\BotBundle\Entity\Card $card)
     {
         $this->card = $card;
     }
