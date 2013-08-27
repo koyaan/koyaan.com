@@ -87,7 +87,7 @@ class DefaultController extends Controller {
 
     
     /**
-     * @Route("/squareglobe")
+     * @Route("/squareglobe", name="squareglobe_index")
      * @Template()
      */
     public function indexAction() {
