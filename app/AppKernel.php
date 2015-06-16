@@ -19,7 +19,11 @@ class AppKernel extends Kernel
             new AppBundle\AppBundle(),
 
 	        new FOS\UserBundle\FOSUserBundle(),
+	        new Mopa\Bundle\BootstrapBundle\MopaBootstrapBundle(),
 
+	        new Sonata\UserBundle\SonataUserBundle('FOSUserBundle'),
+	        new Application\Sonata\UserBundle\ApplicationSonataUserBundle(),
+	        new Sonata\EasyExtendsBundle\SonataEasyExtendsBundle(),
 	        new Sonata\CoreBundle\SonataCoreBundle(),
 	        new Sonata\BlockBundle\SonataBlockBundle(),
 	        new Knp\Bundle\MenuBundle\KnpMenuBundle(),
