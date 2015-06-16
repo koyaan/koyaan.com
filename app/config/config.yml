@@ -10,7 +10,7 @@ parameters:
 
 framework:
     #esi:             ~
-    #translator:      { fallbacks: ["%locale%"] }
+    translator:      { fallbacks: ["%locale%"] }
     secret:          "%secret%"
     router:
         resource: "%kernel.root_dir%/config/routing.yml"
@@ -65,11 +65,17 @@ doctrine:
         #   2. Uncomment database_path in parameters.yml.dist
         #   3. Uncomment next line:
         #     path:     "%database_path%"
-
     orm:
         auto_generate_proxy_classes: "%kernel.debug%"
-        naming_strategy: doctrine.orm.naming_strategy.underscore
         auto_mapping: true
+#    orm:
+#        auto_generate_proxy_classes: "%kernel.debug%"
+#        entity_managers:
+#          default:
+#            naming_strategy: doctrine.orm.naming_strategy.underscore
+#            mappings:
+#                AppBundle:  ~
+
 
 # Swiftmailer Configuration
 swiftmailer:
@@ -78,6 +84,12 @@ swiftmailer:
     username:  "%mailer_user%"
     password:  "%mailer_password%"
     spool:     { type: memory }
+
+# fos user
+fos_user:
+    db_driver: orm
+    firewall_name: main
+    user_class:  AppBundle\Entity\Dummyuser
 
 # app/config/config.yml
 sonata_block:
