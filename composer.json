@@ -28,7 +28,9 @@
         "ircmaxell/password-compat": "^1.0",
         "knplabs/knp-menu-bundle": "~1.1",
         "mopa/bootstrap-bundle": "^2.3",
-        "twbs/bootstrap": "^3.3"
+        "twbs/bootstrap": "^3.3",
+        "sonata-project/media-bundle": "^2.3",
+        "sonata-project/intl-bundle": "^2.2"
     },
     "require-dev": {
         "sensio/generator-bundle": "~2.3"
