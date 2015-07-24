@@ -11,3 +11,5 @@
 /web/bundles/
 /app/sqlite.db
 stuff.md
+/web/js/*
+/web/css/*

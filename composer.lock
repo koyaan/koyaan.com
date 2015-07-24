@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "7a11b3fbcd4e94f6a4176383d7b70553",
+    "hash": "1c474c933f13c7164a66eb9b4b4a24d7",
     "packages": [
         {
             "name": "cocur/slugify",
@@ -3296,41 +3296,46 @@
         },
         {
             "name": "sonata-project/media-bundle",
-            "version": "2.3.2",
+            "version": "2.3.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sonata-project/SonataMediaBundle.git",
-                "reference": "7fe09499334deede0b0e7325432c76d92261ec81"
+                "reference": "15a251e7a9e80acc481e6e7bd0576efb19fb1b7a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sonata-project/SonataMediaBundle/zipball/7fe09499334deede0b0e7325432c76d92261ec81",
-                "reference": "7fe09499334deede0b0e7325432c76d92261ec81",
+                "url": "https://api.github.com/repos/sonata-project/SonataMediaBundle/zipball/15a251e7a9e80acc481e6e7bd0576efb19fb1b7a",
+                "reference": "15a251e7a9e80acc481e6e7bd0576efb19fb1b7a",
                 "shasum": ""
             },
             "require": {
                 "friendsofsymfony/rest-bundle": "~1.1",
-                "imagine/imagine": "*@stable",
+                "imagine/imagine": "~0.3",
                 "jms/serializer-bundle": "~0.11|~1.0",
                 "knplabs/gaufrette": ">=0.1.4",
                 "kriswallsmith/buzz": "0.*",
                 "nelmio/api-doc-bundle": "~2.4",
-                "sonata-project/core-bundle": "~2.2",
+                "sonata-project/core-bundle": "^2.2.6",
                 "sonata-project/doctrine-extensions": "~1.0",
                 "sonata-project/easy-extends-bundle": "~2.1",
                 "sonata-project/intl-bundle": "~2.2",
                 "sonata-project/notification-bundle": "~2.2",
                 "symfony/symfony": "~2.3"
             },
+            "conflict": {
+                "jms/serializer": "<0.13",
+                "sonata-project/block-bundle": "<2.2.8",
+                "sonata-project/seo-bundle": "<1.1.5"
+            },
             "require-dev": {
                 "amazonwebservices/aws-sdk-for-php": "~1.5",
                 "doctrine/mongodb-odm": "~1.0@dev",
                 "jackalope/jackalope-doctrine-dbal": "~1.1",
-                "sonata-project/admin-bundle": "~2.3@dev",
-                "sonata-project/core-bundle": "~2.2@dev",
+                "sonata-project/admin-bundle": "~2.3,<2.4",
                 "sonata-project/doctrine-orm-admin-bundle": "~2.3@dev",
                 "sonata-project/formatter-bundle": "~2.2@dev",
-                "sonata-project/seo-bundle": "~1.1"
+                "sonata-project/seo-bundle": "~1.1",
+                "symfony/phpunit-bridge": "~2.7|~3.0"
             },
             "suggest": {
                 "amazonwebservices/aws-sdk-for-php": "~1.5",
@@ -3378,7 +3383,7 @@
                 "vimeo",
                 "youtube"
             ],
-            "time": "2015-06-29 12:02:10"
+            "time": "2015-07-22 13:14:11"
         },
         {
             "name": "sonata-project/news-bundle",
@@ -3830,26 +3835,25 @@
         },
         {
             "name": "symfony/symfony",
-            "version": "v2.7.2",
+            "version": "v2.6.10",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/symfony.git",
-                "reference": "969d709ad428076bf1084e386dc26dd904d9fb84"
+                "reference": "e246af5f3bdf64fa5a85936ee78e3574e094cf5f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/symfony/zipball/969d709ad428076bf1084e386dc26dd904d9fb84",
-                "reference": "969d709ad428076bf1084e386dc26dd904d9fb84",
+                "url": "https://api.github.com/repos/symfony/symfony/zipball/e246af5f3bdf64fa5a85936ee78e3574e094cf5f",
+                "reference": "e246af5f3bdf64fa5a85936ee78e3574e094cf5f",
                 "shasum": ""
             },
             "require": {
                 "doctrine/common": "~2.3",
-                "php": ">=5.3.9",
+                "php": ">=5.3.3",
                 "psr/log": "~1.0",
-                "twig/twig": "~1.18"
+                "twig/twig": "~1.12,>=1.12.3"
             },
             "replace": {
-                "symfony/asset": "self.version",
                 "symfony/browser-kit": "self.version",
                 "symfony/class-loader": "self.version",
                 "symfony/config": "self.version",
@@ -3873,6 +3877,7 @@
                 "symfony/monolog-bridge": "self.version",
                 "symfony/options-resolver": "self.version",
                 "symfony/process": "self.version",
+                "symfony/propel1-bridge": "self.version",
                 "symfony/property-access": "self.version",
                 "symfony/proxy-manager-bridge": "self.version",
                 "symfony/routing": "self.version",
@@ -3903,23 +3908,18 @@
                 "ircmaxell/password-compat": "~1.0",
                 "monolog/monolog": "~1.11",
                 "ocramius/proxy-manager": "~0.4|~1.0",
-                "symfony/phpunit-bridge": "self.version"
+                "propel/propel1": "~1.6",
+                "symfony/phpunit-bridge": "~2.7"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.7-dev"
+                    "dev-master": "2.6-dev"
                 }
             },
             "autoload": {
-                "psr-4": {
-                    "Symfony\\Bridge\\Doctrine\\": "src/Symfony/Bridge/Doctrine/",
-                    "Symfony\\Bridge\\Monolog\\": "src/Symfony/Bridge/Monolog/",
-                    "Symfony\\Bridge\\ProxyManager\\": "src/Symfony/Bridge/ProxyManager/",
-                    "Symfony\\Bridge\\Swiftmailer\\": "src/Symfony/Bridge/Swiftmailer/",
-                    "Symfony\\Bridge\\Twig\\": "src/Symfony/Bridge/Twig/",
-                    "Symfony\\Bundle\\": "src/Symfony/Bundle/",
-                    "Symfony\\Component\\": "src/Symfony/Component/"
+                "psr-0": {
+                    "Symfony\\": "src/"
                 },
                 "classmap": [
                     "src/Symfony/Component/HttpFoundation/Resources/stubs",
@@ -3948,7 +3948,7 @@
             "keywords": [
                 "framework"
             ],
-            "time": "2015-07-13 19:27:49"
+            "time": "2015-07-13 09:34:32"
         },
         {
             "name": "twbs/bootstrap",
