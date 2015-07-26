@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="description" content="The number one resource for koyaan.com related information">
         <meta name="author" content="Armin Weihbold">
-        <title>{% block title %}Welcome!{% endblock %}</title>
+        <title>{% block title %}+koyaan's blog{% endblock %}</title>
         <link href="{{ asset('css/bootstrap.css') }}" rel="stylesheet" media="screen">
         {% block stylesheets %}
             {% stylesheets
@@ -39,16 +39,13 @@
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav navbar-right">
                         <li>
-                            <a href="index.html">+koyaan</a>
+                            <a href="{{ path('sonata_news_archive') }}">+koyaan's blog</a>
                         </li>
                         <li>
-                            <a href="about.html">8x8Helper</a>
+                            <a href="http://8x8helper.meteor.com">8x8Helper</a>
                         </li>
                         <li>
-                            <a href="post.html">Squareglobe</a>
-                        </li>
-                        <li>
-                            <a href="/">Contact</a>
+                            <a href="{{ path('contact') }}">Contact</a>
                         </li>
                     </ul>
                 </div>
@@ -58,16 +55,14 @@
         </nav>
         {% endblock %}
         {% block header %}
-            <!-- Page Header -->
-            <!-- Set your background image for this header on the line below. -->
             <header class="intro-header">
                 <div class="container">
                     <div class="row">
                         <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
                             <div class="site-heading">
-                                <h1>armin's ramblings</h1>
+                                <h1>Armin's ramblings</h1>
                                 <hr class="small">
-                                <span class="subheading">clever meta blog title</span>
+                                <span class="subheading">clever meta blog subtitle</span>
                             </div>
                         </div>
                     </div>
@@ -83,7 +78,7 @@
                         <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
                             <ul class="list-inline text-center">
                                 <li>
-                                    <a href="#">
+                                    <a href="https://twitter.com/koyaan5">
                                 <span class="fa-stack fa-lg">
                                     <i class="fa fa-circle fa-stack-2x"></i>
                                     <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
@@ -91,15 +86,7 @@
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="#">
-                                <span class="fa-stack fa-lg">
-                                    <i class="fa fa-circle fa-stack-2x"></i>
-                                    <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
-                                </span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
+                                    <a href="https://github.com/koyaan">
                                 <span class="fa-stack fa-lg">
                                     <i class="fa fa-circle fa-stack-2x"></i>
                                     <i class="fa fa-github fa-stack-1x fa-inverse"></i>
@@ -107,7 +94,7 @@
                                     </a>
                                 </li>
                             </ul>
-                            <p class="copyright text-muted">Copyright &copy; Your Website 2014</p>
+                            <p class="copyright text-muted">Copyright &copy; koyaan.com 2015</p>
                         </div>
                     </div>
                 </div>

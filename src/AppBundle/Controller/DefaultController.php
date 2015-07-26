@@ -5,25 +5,10 @@ namespace AppBundle\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\Response;
+
 
 class DefaultController extends Controller
 {
-    /**
-     * @Route("/app/example", name="homepage")
-     */
-    public function exampleAction()
-    {
-        return $this->render('default/index.html.twig');
-    }
-
-	/**
-	 * @Route("/app/empty", name="empty")
-	 */
-	public function emptyAction()
-	{
-		return new Response("",Response::HTTP_NO_CONTENT);
-	}
 
 	/**
 	 * @Route("/", name="index")
@@ -31,15 +16,15 @@ class DefaultController extends Controller
 	 */
 	public function indexAction() {
 
-		return array();
+		return $this->forward("SonataNewsBundle:Post:archive", array(""));
 	}
 
 
 	/**
-	 * @Route("/post", name="post")
+	 * @Route("/contact", name="contact")
 	 * @Template()
 	 */
-	public function postAction() {
+	public function contactAction() {
 
 		return array();
 	}

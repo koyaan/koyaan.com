@@ -1,0 +1,32 @@
+{% extends '::blog.html.twig' %}
+
+
+{% block header %}
+    <header class="intro-header">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    <div class="post-heading">
+                        <h1>{{ post.title }}</h1>
+                        <h2 class="subheading">{{ post.abstract }}</h2>
+                        <span class="post-meta">Posted on {{ post.publicationDateStart | format_date }}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+{% endblock %}
+
+{% block body %}
+    <!-- Post Content -->
+    <article>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    {{ post.content|raw }}
+                </div>
+            </div>
+        </div>
+    </article>
+    <hr>
+{% endblock body %}
